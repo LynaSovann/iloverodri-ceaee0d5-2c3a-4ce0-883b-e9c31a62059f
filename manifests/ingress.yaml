@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: iloverodri-ceaee0d5-2c3a-4ce0-883b-e9c31a62059f-https-ingress
+  namespace: iloverodri-ceaee0d5-2c3a-4ce0-883b-e9c31a62059f
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - thanak81-iloverodri.assessify.org
+      secretName: iloverodri-ceaee0d5-2c3a-4ce0-883b-e9c31a62059f-secret-tls
+  rules:
+    - host: thanak81-iloverodri.assessify.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: iloverodri-ceaee0d5-2c3a-4ce0-883b-e9c31a62059f-service
+                port:
+                  number: 8092
